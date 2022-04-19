@@ -35,12 +35,6 @@
     <Reference Include="jose-jwt, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\jose-jwt.4.0.0\lib\net40\jose-jwt.dll</HintPath>
     </Reference>
-    <Reference Include="JWT, Version=8.0.0.0, Culture=neutral, PublicKeyToken=6f98bca0f40f2ecf, processorArchitecture=MSIL">
-      <HintPath>packages\JWT.8.9.0\lib\net40\JWT.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>packages\Newtonsoft.Json.10.0.3\lib\net40\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.IdentityModel" />
@@ -53,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GerarToken.cs" />
+    <Compile Include="Parametros.cs" />
     <Compile Include="payloadNSFE.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

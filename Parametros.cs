@@ -5,8 +5,16 @@ using System.Text;
 
 namespace MigrateAPI
 {
-    public class payloadNSFE
+    public class Parametros
     {
+        public class Tokencls
+        {
+            public string token { get; set; }
+            public string accessToken { get; set; }
+            public int accessTokenExpireAt { get; set; }
+            public string refreshToken { get; set; }
+            public int refreshTokenExpireAt { get; set; }
+        }
 
         // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
         public class RPSSubs
@@ -324,10 +332,11 @@ namespace MigrateAPI
             public double Versao { get; set; }
             public List<RP> RPS { get; set; }
         }
+
         public class Root
         {
             public Documento Documento { get; set; }
-
         }
+
     }
 }
