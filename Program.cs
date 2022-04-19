@@ -16,7 +16,7 @@ namespace MigrateAPI
         /// constantes utilizadas para pegar a autenticação do cliente
         /// </summary>
         public static readonly DateTime UnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
-        public const string chaveParceiro = "96243042000122"; //passar aqui a chave do cliente
+        public const string chaveCNPJ = "96243042000122"; //passar aqui a chave do cliente que é o CNPJ
         public const string chaveAlgorix = "x5YYhho092YCr/NRrxtFHw=="; //chave única nossa 
         public const string chaveSecret = "mQjJ/oW3S/JfqgR5JTJ/G+94droQTv1M"; // chave verifysignature
         public const string URL_BASE = "https://apibrhomolog.invoicy.com.br/";
@@ -665,7 +665,7 @@ namespace MigrateAPI
             {
                 {"iat", PegarIat(utcnow) },
                 {"exp", PegarExp(utcnow) },
-                {"sub", chaveParceiro },
+                {"sub", chaveCNPJ },
                 {"partnerKey", chaveAlgorix },
             };
             return payload;
