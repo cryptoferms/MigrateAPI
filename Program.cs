@@ -623,7 +623,7 @@ namespace MigrateAPI
         }
         private static string GerarToken()
         {
-            //É preciso criar o primeiro Token no site JWT IO https://desenvolvedores.migrate.info/2021/06/autenticacao-api-rest/
+           
             var accessToken = new Tokencls() { token = RotinaToken() };
             JavaScriptSerializer js = new JavaScriptSerializer();
             var tokenJson = js.Serialize(accessToken);
@@ -648,6 +648,7 @@ namespace MigrateAPI
 
         /// <summary>
         /// Rotina responsável para criar e encodar um Token que será utilizado no método GerarToken
+        /// Igual no site JWT IO https://desenvolvedores.migrate.info/2021/06/autenticacao-api-rest/
         /// </summary>
         /// <returns></returns>
         private static string RotinaToken()
