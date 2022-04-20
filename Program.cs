@@ -26,21 +26,26 @@ namespace MigrateAPI
             //GeraPayload();
             //pega o primeiro Token manual e retorna o accessToken
             var accessToken = GerarToken();
+            var payload = GeraPayload();
             //usa o refreshToken para obter o accesToken nas requisições da API
-            EnviarDocumentosNFSE(accessToken);
+            EnviarDocumentosNFSE(accessToken, payload);
 
             Console.ReadKey();
         }
 
-        private static void GeraPayload()
+        private static string GeraPayload()
         {
             var payload = new Root()
             {
-             Documento = {
-                ModeloDocumento = "NSFE",
-                Versao = 1.0,
-                RPS = new List<RP>()
-                { new RP()
+                Documento = new List<Documento>()
+                {
+                    new Documento()
+                {
+                    ModeloDocumento = "NSFE",
+                    Versao = 1.0,
+                    RPS = new List<RP>()
+                {
+                        new RP()
                  {
                     RPSNumero = 5,
                     RPSTipo = 1,
@@ -152,26 +157,23 @@ namespace MigrateAPI
                           ValPIS = 0,
                       }
                   }
+                    }
                 }
                 }
-                }
+                    }
             };
-            string fileName = "NSFE.json";
+            //string fileName = "NSFE.json";
             var js = new JavaScriptSerializer();
             string jsonString = js.Serialize(payload);
-            File.WriteAllText(fileName, jsonString);
+            //File.WriteAllText(fileName, jsonString);
 
-            Console.WriteLine(File.ReadAllText(fileName));
+            //Console.WriteLine(File.ReadAllText(fileName));
+
+            return jsonString;
         }
 
-        private static void EnviarDocumentosNFSE(string token)
+        private static void EnviarDocumentosNFSE(string token, string payload)
         {
-            var caminho = @"C:\Users\nando\Dropbox\PC\Documents\ALGORIX SERVIÇO\Repos tasks Joao\MigrateSO\MigrateAPI\bin\Debug\NSFE.json";
-            var payload = File.OpenRead(caminho);
-            var js = new JavaScriptSerializer();
-
-
-
             var request = (HttpWebRequest)WebRequest.Create($"{URL_BASE}senddocuments/nfse?type=Emissao&tpAmb=2");
             request.Method = "POST";
             request.Headers.Add("Authorization", token);

@@ -335,7 +335,8 @@ namespace MigrateAPI
 
         public class Root
         {
-            public Documento Documento { get; set; }
+            public List<Root> roots { get; set; }
+            public List<Documento> Documento { get; set; }
         }
 
     }
