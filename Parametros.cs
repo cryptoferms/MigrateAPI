@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Web.Script.Serialization;
 
 namespace MigrateAPI
 {
@@ -297,8 +298,8 @@ namespace MigrateAPI
             public int RPSNumero { get; set; }
             public string RPSSerie { get; set; }
             public int RPSTipo { get; set; }
-            public DateTime dEmis { get; set; }
-            public DateTime dCompetencia { get; set; }
+            public string dEmis { get; set; }
+            public string dCompetencia { get; set; }
             public int LocalPrestServ { get; set; }
             public int natOp { get; set; }
             public string Operacao { get; set; }
@@ -335,8 +336,7 @@ namespace MigrateAPI
 
         public class Root
         {
-            public List<Root> roots { get; set; }
-            public List<Documento> Documento { get; set; }
+            public Documento Documento { get; set; }
         }
 
     }

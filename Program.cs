@@ -1,7 +1,6 @@
 ﻿using Jose;
 using System;
 using System.Collections.Generic;
-using System.IdentityModel.Tokens;
 using System.IO;
 using System.Net;
 using System.Text;
@@ -20,10 +19,9 @@ namespace MigrateAPI
         public const string chaveAlgorix = "x5YYhho092YCr/NRrxtFHw=="; //chave única nossa 
         public const string chaveSecret = "mQjJ/oW3S/JfqgR5JTJ/G+94droQTv1M"; // chave verifysignature
         public const string URL_BASE = "https://apibrhomolog.invoicy.com.br/";
-       
+
         static void Main(string[] args)
         {
-            //GeraPayload();
             //pega o primeiro Token manual e retorna o accessToken
             var accessToken = GerarToken();
             var payload = GeraPayload();
@@ -35,22 +33,25 @@ namespace MigrateAPI
 
         private static string GeraPayload()
         {
-            var payload = new Root()
+            List<Root> _list = new List<Root>();
+            //foreach (var item in object)
+            //{
+
+            _list.Add(new Root()
             {
-                Documento = new List<Documento>()
+                Documento = new Documento()
                 {
-                    new Documento()
-                {
-                    ModeloDocumento = "NSFE",
-                    Versao = 1.0,
+                    ModeloDocumento = "NFSE",
+                    Versao = 1.00,
                     RPS = new List<RP>()
                 {
                         new RP()
                  {
-                    RPSNumero = 5,
+                    RPSNumero = _list.Count+1,
+                    RPSSerie = "251",
                     RPSTipo = 1,
-                    dEmis = DateTime.Now,
-                    dCompetencia = DateTime.Now.AddDays(3),
+                    dEmis = DateTime.Now.ToString("s"),
+                    dCompetencia = DateTime.Now.AddDays(3).ToString("s"),
                     LocalPrestServ = 0,
                     natOp = 1,
                     Operacao = "",
@@ -68,7 +69,7 @@ namespace MigrateAPI
                         SubsSerie = "",
                         SubsTipo = 0,
                         SubsNFSeNumero = 0,
-                        SubsDEmisNFSe = DateTime.Now.ToString(),
+                        SubsDEmisNFSe = DateTime.Now.ToString("s"),
                     },
                     Prestador = new Prestador()
                     {
@@ -155,18 +156,192 @@ namespace MigrateAPI
                           ValServicos = 399.00,
                           ValDeducoes = 0,
                           ValPIS = 0,
-                      }
-                  }
-                    }
-                }
-                }
-                    }
-            };
-            //string fileName = "NSFE.json";
-            var js = new JavaScriptSerializer();
-            string jsonString = js.Serialize(payload);
-            //File.WriteAllText(fileName, jsonString);
+                          ValBCPIS = 0,
+                          ValCOFINS = 0.00,
+                          ValBCCOFINS = 0,
+                          ValINSS = 0,
+                          ValBCINSS = 0,
+                          ValIR = 0.00,
+                          ValBCIRRF = 0,
+                          ValCSLL = 0.00,
+                          ValBCCSLL = 0,
+                          RespRetencao = 0,
+                          Tributavel = "",
+                          ValISS = 11.97,
+                          ISSRetido = 2,
+                          ValISSRetido = 0,
+                          ValTotal = 0,
+                          ValTotalRecebido = 0,
+                          ValBaseCalculo = 399.00,
+                          ValOutrasRetencoes = 0,
+                          ValAliqISS = 0.030000,
+                          ValAliqPIS = 0.0000,
+                          PISRetido = 0,
+                          ValAliqCOFINS = 0.0000,
+                          COFINSRetido = 0,
+                          ValAliqIR = 0,
+                          IRRetido = 0,
+                          ValAliqCSLL = 0.0000,
+                          CSLLRetido = 0,
+                          ValAliqINSS = 0.0000,
+                          INSSRetido = 0,
+                          ValAliqCpp = 0,
+                          CppRetido = 0,
+                          ValCpp = 0,
+                          OutrasRetencoesRetido = 0,
+                          ValBCOutrasRetencoes = 0,
+                          ValAliqOutrasRetencoes = 0,
+                          ValAliqTotTributos = 0,
+                          ValLiquido = 399.00,
+                          ValDescIncond = 0.00,
+                          ValDescCond = 0.00,
+                          ValAcrescimos = 0,
+                          ValAliqISSoMunic =0.000,
+                          InfValPIS = "",
+                          InfValCOFINS = "",
+                          ValLiqFatura = 0,
+                          ValBCISSRetido = 0,
+                          NroFatura = 0,
+                          CargaTribValor = 0,
+                          CargaTribPercentual = 0,
+                          CargaTribFonte = "",
+                          JustDed = "",
+                          ValCredito = 0,
+                          OutrosImp = 0,
+                          ValRedBC = 0,
+                          ValRetFederais = 0,
+                          ValAproxTrib = 0,
+                      },
+                      LocalPrestacao = new LocalPrestacao()
+                      {
+                          SerEndTpLgr = "",
+                          SerEndLgr = "",
+                          SerEndNumero = "",
+                          SerEndComplemento = "",
+                          SerEndBairro = "",
+                          SerEndxMun = "",
+                          SerEndcMun = 0,
+                          SerEndCep = 0,
+                          SerEndSiglaUF = ""
+                      },
+                      IteListServico = "14.02",
+                      Cnae = 0,
+                      fPagamento = "",
+                      tpag = 0,
+                      TributMunicipio = "9152600",
+                      TributMunicDesc= "",
+                      Discriminacao = "MAO DE OBRA",
+                      cMun = 4310207,
+                      SerQuantidade = 0,
+                      SerUnidade = "",
+                      SerNumAlvara= "",
+                      PaiPreServico=  "BR",
+                      cMunIncidencia= 0,
+                      dVencimento= "0000-00-00T00:00:00",
+                      ObsInsPagamento=  "",
+                      ObrigoMunic= 0,
+                      TributacaoISS= 0,
+                      CodigoAtividadeEconomica= "",
+                      ServicoViasPublicas= 0,
+                      NumeroParcelas= 0,
+                      NroOrcamento= 0,
+                      CodigoNBS=  ""
+                  },
+                  Tomador = new Tomador()
+                  {
+                     TomaCNPJ = "02663790000110",
+                     TomaCPF = "",
+                     TomaIE = "",
+                     TomaIM = "",
+                     TomaRazaoSocial= "AGROINOX",
+                     TomatpLgr= "AV",
+                     TomaEndereco= "Pde Dehon",
+                     TomaNumero= "153",
+                     TomaComplemento = "",
+                     TomaBairro = "CENTRO",
+                     TomacMun = 4302204,
+                     TomaxMun = "Boa vista do buricá",
+                     TomaUF =  "RS",
+                     TomaPais= "BR",
+                     TomaCEP= 98918000,
+                     TomaTelefone= "5537481081",
+                     TomaTipoTelefone= "",
+                     TomaEmail= "",
+                     TomaSite= "",
+                     TomaIME= "",
+                     TomaSituacaoEspecial= "",
+                     DocTomadorEstrangeiro = "",
+                     TomaRegEspTrib = 0,
+                     TomaCadastroMunicipio = 0,
+                     TomaOrgaoPublico = 0
+                  },
+                  IntermServico = new IntermServico()
+                  {
+                        IntermRazaoSocial = "",
+                        IntermCNPJ = "",
+                        IntermCPF = "",
+                        IntermIM = "",
+                        IntermEmail = "",
+                        IntermEndereco = "",
+                        IntermNumero = "",
+                        IntermComplemento = "",
+                        IntermBairro = "",
+                        IntermCep = 0,
+                        IntermCmun = 0,
+                        IntermXmun = "",
+                        IntermFone = "",
+                        IntermIE = ""
+                  },
+                  ConstCivil = new ConstCivil()
+                  {
+                        CodObra = "",
+                        Art =  "",
+                        ObraLog = "",
+                        ObraCompl = "",
+                        ObraNumero = "",
+                        ObraBairro = "",
+                        ObraCEP = 0,
+                        ObraMun = 0,
+                        ObraUF = "",
+                        ObraPais = "",
+                        ObraCEI = "",
+                        ObraMatricula = "",
+                        ObraValRedBC = 0,
+                        ObraTipo = 0,
+                        ObraNomeFornecedor = "",
+                        ObraNumeroNF = 0,
+                        ObraDataNF = "0000-00-00T00:00:00",
+                        ObraNumEncapsulamento = "",
+                        AbatimentoMateriais = 0,
+                        ListaMaterial = new List<object>()
+                  },
+                  ListaDed = new List<object>(),
+                  Transportadora = new Transportadora()
+                  {
+                        TraNome = "",
+                        TraCPFCNPJ = "",
+                        TraIE = "",
+                        TraPlaca = "",
+                        TraEnd = "",
+                        TraMun = 0,
+                        TraUF = "",
+                        TraPais = "",
+                        TraTipoFrete = 0
+                  },
+                  NFSOutrasinformacoes = "",
+                  RPSCanhoto = 0,
+                  Arquivo = "",
+                  ExtensaoArquivo = ""
+    }
+}
+                },
 
+            });
+
+            string fileName = $"NSFE_JSON.json";
+            var js = new JavaScriptSerializer();
+            string jsonString = js.Serialize(_list);
+            File.WriteAllText(fileName, jsonString);
             //Console.WriteLine(File.ReadAllText(fileName));
 
             return jsonString;
@@ -183,7 +358,7 @@ namespace MigrateAPI
                 streamWriter.Write(payload);
             }
 
-            using (var response = (HttpWebResponse)request.GetResponse())  
+            using (var response = (HttpWebResponse)request.GetResponse())
             {
                 StreamReader streamReader = new StreamReader(response.GetResponseStream());
                 var result = streamReader.ReadToEnd();
@@ -281,5 +456,5 @@ namespace MigrateAPI
             return Encoding.UTF8.GetBytes(chaveSecret);
         }
     }
-  
+
 }
