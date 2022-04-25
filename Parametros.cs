@@ -334,7 +334,7 @@ namespace MigrateAPI
             public List<RP> RPS { get; set; }
         }
 
-        public class Root
+        public class Raiz
         {
             public Documento Documento { get; set; }
         }
