@@ -1852,20 +1852,31 @@ namespace MigrateAPI
 
         private static void EnviarDocumentosNFSE(string token, string payload)
         {
-            var request = (HttpWebRequest)WebRequest.Create($"{URL_BASE}senddocuments/nfse?type=Emissao&tpAmb=2");
-            request.Method = "POST";
-            request.Headers.Add("Authorization", token);
-            request.ContentType = "application/json";
-            using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+            try
             {
-                streamWriter.Write(payload);
-            }
 
-            using (var response = (HttpWebResponse)request.GetResponse())
+                var request = (HttpWebRequest)WebRequest.Create($"{URL_BASE}senddocuments/nfse?type=Emissao&tpAmb=2");
+                request.Method = "POST";
+                request.Headers.Add("Authorization", token);
+                request.ContentType = "application/json";
+                using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+                {
+                    streamWriter.Write(payload);
+                }
+
+                using (var response = (HttpWebResponse)request.GetResponse())
+                {
+                    StreamReader streamReader = new StreamReader(response.GetResponseStream());
+                    var result = streamReader.ReadToEnd();
+                    var dataHora = DateTimeOffset.Now.ToString("g").Replace(':', '.').Replace('/', '-');
+                    string fileName = @"C:\Users\nando\Dropbox\PC\Documents\ALGORIX SERVIÇO\Repos tasks Joao\MigrateSO\MigrateAPI\LogsNSFE\ResponseNSFE" + dataHora + ".json";
+                    File.WriteAllText(fileName, result);
+                    Console.WriteLine($"payload result----------------\n Status de resposta:{response.StatusCode}\n\n{result}");
+                }
+            }
+            catch (Exception ex)
             {
-                StreamReader streamReader = new StreamReader(response.GetResponseStream());
-                var result = streamReader.ReadToEnd();
-                Console.WriteLine($"payload result----------------\n Status de resposta:{response.StatusCode}\n\n{result}");
+                Console.WriteLine(ex.Message);
             }
         }
         private static string GerarToken()
